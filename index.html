@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="it">
 <head>
@@ -24,6 +25,8 @@
     --bad-soft: #f6e4de;
     --good: #0f7d0f;
     --critical: #c23b3b;
+    --cat-0: #2a78d6; --cat-1: #eb6834; --cat-2: #1baf7a; --cat-3: #eda100;
+    --cat-4: #e87ba4; --cat-5: #008300; --cat-6: #4a3aa7; --cat-7: #e34948;
     --radius: 14px;
     --shadow: 0 1px 2px rgba(32,36,31,0.06), 0 8px 24px -12px rgba(32,36,31,0.18);
     padding-top: env(safe-area-inset-top, 0px);
@@ -31,478 +34,222 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #14171a;
-      --surface: #1c2023;
-      --surface-2: #23282b;
-      --ink: #eceae2;
-      --muted: #9aa39a;
-      --line: #2c3134;
-      --accent: #5fbfa0;
-      --accent-ink: #0e1512;
-      --accent-soft: #1f342e;
-      --bad: #e08a76;
-      --bad-soft: #3a2420;
-      --good: #3fc23f;
-      --critical: #e2726f;
+      --bg: #14171a; --surface: #1c2023; --surface-2: #23282b; --ink: #eceae2; --muted: #9aa39a;
+      --line: #2c3134; --accent: #5fbfa0; --accent-ink: #0e1512; --accent-soft: #1f342e;
+      --bad: #e08a76; --bad-soft: #3a2420; --good: #3fc23f; --critical: #e2726f;
+      --cat-0: #3987e5; --cat-1: #d95926; --cat-2: #199e70; --cat-3: #c98500;
+      --cat-4: #d55181; --cat-5: #008300; --cat-6: #9085e9; --cat-7: #e66767;
       --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
     }
   }
   :root[data-theme="dark"] {
-    --bg: #14171a;
-    --surface: #1c2023;
-    --surface-2: #23282b;
-    --ink: #eceae2;
-    --muted: #9aa39a;
-    --line: #2c3134;
-    --accent: #5fbfa0;
-    --accent-ink: #0e1512;
-    --accent-soft: #1f342e;
-    --bad: #e08a76;
-    --bad-soft: #3a2420;
-    --good: #3fc23f;
-    --critical: #e2726f;
+    --bg: #14171a; --surface: #1c2023; --surface-2: #23282b; --ink: #eceae2; --muted: #9aa39a;
+    --line: #2c3134; --accent: #5fbfa0; --accent-ink: #0e1512; --accent-soft: #1f342e;
+    --bad: #e08a76; --bad-soft: #3a2420; --good: #3fc23f; --critical: #e2726f;
+    --cat-0: #3987e5; --cat-1: #d95926; --cat-2: #199e70; --cat-3: #c98500;
+    --cat-4: #d55181; --cat-5: #008300; --cat-6: #9085e9; --cat-7: #e66767;
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 24px -12px rgba(0,0,0,0.5);
   }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; }
   body {
-    background: var(--bg);
-    color: var(--ink);
+    background: var(--bg); color: var(--ink);
     font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    padding-inline: 16px;
-    padding-block: 20px 48px;
-    max-width: 640px;
-    margin: 0 auto;
+    padding-inline: 16px; padding-block: 20px 48px; max-width: 640px; margin: 0 auto;
   }
   img { max-width: 100%; }
   [hidden] { display: none !important; }
   h1, h2, .num { font-family: "Fraunces", Georgia, serif; }
   .num, .tabular { font-variant-numeric: tabular-nums; }
 
-  header.top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 18px;
+  header.top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 18px; }
+  header.top .title-row { display: flex; align-items: center; gap: 8px; }
+  header.top h1 { font-size: 22px; font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .icon-btn {
+    border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+    width: 28px; height: 28px; border-radius: 50%; font-size: 13px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  header.top h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
-  .tabs {
-    display: flex;
-    gap: 4px;
-    background: var(--surface-2);
-    border-radius: 999px;
-    padding: 3px;
-  }
+  .icon-btn:hover { background: var(--surface-2); color: var(--ink); }
+  .tabs { display: flex; gap: 4px; background: var(--surface-2); border-radius: 999px; padding: 3px; flex-wrap: wrap; }
   .tab {
-    border: none;
-    background: transparent;
-    color: var(--muted);
-    font: inherit;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 999px;
-    cursor: pointer;
+    border: none; background: transparent; color: var(--muted); font: inherit; font-size: 12.5px;
+    font-weight: 600; padding: 6px 12px; border-radius: 999px; cursor: pointer;
   }
-  .tab[aria-selected="true"] {
-    background: var(--surface);
-    color: var(--ink);
-    box-shadow: var(--shadow);
-  }
+  .tab[aria-selected="true"] { background: var(--surface); color: var(--ink); box-shadow: var(--shadow); }
 
-  .nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
+  .nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 14px; }
   .nav button {
-    border: 1px solid var(--line);
-    background: var(--surface);
-    color: var(--ink);
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    font-size: 15px;
-    cursor: pointer;
+    border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+    width: 32px; height: 32px; border-radius: 50%; font-size: 15px; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
   }
   .nav button:hover { background: var(--surface-2); }
-  .nav .period-label {
-    font-weight: 600;
-    font-size: 15px;
-    min-width: 150px;
-    text-align: center;
-    text-transform: capitalize;
-  }
+  .nav .period-label { font-weight: 600; font-size: 15px; min-width: 150px; text-align: center; text-transform: capitalize; }
 
   .summary {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 20px;
-    margin-bottom: 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 20px; margin-bottom: 16px;
   }
-  .summary .label {
-    color: var(--muted);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-weight: 600;
-  }
-  .summary .total {
-    font-size: 34px;
-    font-weight: 600;
-    margin-top: 4px;
-    line-height: 1.1;
-  }
-  .summary .sub {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 6px;
-  }
+  .summary .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+  .summary .total { font-size: 34px; font-weight: 600; margin-top: 4px; line-height: 1.1; }
+  .summary .sub { color: var(--muted); font-size: 13px; margin-top: 6px; }
 
   .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding: 18px;
-    margin-bottom: 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 18px; margin-bottom: 16px;
   }
-  .card h2 {
-    font-size: 15px;
-    font-weight: 600;
-    margin: 0 0 14px;
-    font-family: "Work Sans", sans-serif;
-  }
+  .card h2 { font-size: 15px; font-weight: 600; margin: 0 0 14px; font-family: "Work Sans", sans-serif; }
+  .card h2 .h2-sub { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
 
-  .bar-row {
-    display: grid;
-    grid-template-columns: 92px 1fr 64px;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    font-size: 13px;
-  }
+  .pie-wrap { display: flex; justify-content: center; margin-bottom: 18px; }
+  .pie-svg { width: 148px; height: 148px; }
+
+  .bar-row { display: grid; grid-template-columns: 14px 84px 1fr 64px; align-items: center; gap: 8px; margin-bottom: 10px; font-size: 13px; }
   .bar-row:last-child { margin-bottom: 0; }
-  .bar-row .cat-name {
-    color: var(--ink);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .bar-track {
-    height: 8px;
-    background: var(--surface-2);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-  .bar-fill {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 999px;
-    transition: width 0.25s ease;
-  }
-  .bar-row .cat-amount {
-    text-align: right;
-    color: var(--muted);
-  }
+  .bar-row .cat-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .bar-row .cat-name { color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .bar-row .cat-pct { color: var(--muted); font-size: 11.5px; margin-left: 4px; }
+  .bar-track { height: 8px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 999px; transition: width 0.25s ease; }
+  .bar-row .cat-amount { text-align: right; color: var(--muted); }
 
-  .year-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
-    gap: 8px;
-    align-items: end;
-    height: 140px;
-    margin-bottom: 8px;
-  }
+  .year-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px; align-items: end; height: 140px; margin-bottom: 8px; }
   .year-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%;
-    gap: 6px;
-    cursor: pointer;
-    border: none;
-    background: none;
-    font: inherit;
-    padding: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    height: 100%; gap: 6px; cursor: pointer; border: none; background: none; font: inherit; padding: 0;
   }
-  .year-col .bar {
-    width: 100%;
-    max-width: 26px;
-    background: var(--accent-soft);
-    border-radius: 4px 4px 0 0;
-    min-height: 2px;
-  }
+  .year-col .bar { width: 100%; max-width: 26px; background: var(--accent-soft); border-radius: 4px 4px 0 0; min-height: 2px; }
   .year-col.current .bar { background: var(--accent); }
-  .year-col .mon {
-    font-size: 10px;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
+  .year-col .mon { font-size: 10px; color: var(--muted); text-transform: uppercase; }
 
-  form.add {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  form.add { display: flex; flex-direction: column; gap: 12px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  label { font-size: 12px; color: var(--muted); font-weight: 600; display: block; margin-bottom: 5px; }
+  input[type="date"], input[type="number"], input[type="text"], input[type="password"], select {
+    width: 100%; font: inherit; font-size: 15px; padding: 9px 10px; border: 1px solid var(--line);
+    border-radius: 9px; background: var(--bg); color: var(--ink);
   }
-  .row2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  label {
-    font-size: 12px;
-    color: var(--muted);
-    font-weight: 600;
-    display: block;
-    margin-bottom: 5px;
-  }
-  input[type="date"], input[type="number"], input[type="text"] {
-    width: 100%;
-    font: inherit;
-    font-size: 15px;
-    padding: 9px 10px;
-    border: 1px solid var(--line);
-    border-radius: 9px;
-    background: var(--bg);
-    color: var(--ink);
-  }
-  input:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
-  }
-  .chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+  input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip {
-    border: 1px solid var(--line);
-    background: var(--bg);
-    color: var(--ink);
-    font: inherit;
-    font-size: 12.5px;
-    padding: 6px 11px;
-    border-radius: 999px;
-    cursor: pointer;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit;
+    font-size: 12.5px; padding: 6px 11px; border-radius: 999px; cursor: pointer;
   }
-  .chip[aria-pressed="true"] {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: var(--accent-ink);
-  }
+  .chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .chip.removable { display: inline-flex; align-items: center; gap: 6px; }
+  .chip.removable .x { opacity: 0.6; font-weight: 700; }
+  .chip.removable:hover .x { opacity: 1; }
+
   button.submit {
-    border: none;
-    background: var(--accent);
-    color: var(--accent-ink);
-    font: inherit;
-    font-weight: 600;
-    font-size: 14.5px;
-    padding: 11px;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-top: 2px;
+    border: none; background: var(--accent); color: var(--accent-ink); font: inherit; font-weight: 600;
+    font-size: 14.5px; padding: 11px; border-radius: 10px; cursor: pointer; margin-top: 2px;
   }
   button.submit:disabled { opacity: 0.5; cursor: default; }
   button.submit:hover:not(:disabled) { filter: brightness(1.05); }
+  button.ghost {
+    border: 1px solid var(--line); background: transparent; color: var(--muted); font: inherit;
+    font-weight: 600; font-size: 13px; padding: 9px; border-radius: 9px; cursor: pointer;
+  }
+  button.ghost:hover { background: var(--surface-2); color: var(--ink); }
+  .form-actions { display: flex; gap: 8px; }
+  .form-actions button.submit { flex: 1; }
+  .form-actions button.ghost { flex: 0 0 auto; }
 
   ul.entries { list-style: none; margin: 0; padding: 0; }
-  .day-heading {
-    color: var(--muted);
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-    margin: 16px 0 8px;
-  }
+  .day-heading { color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin: 16px 0 8px; }
   .day-heading:first-child { margin-top: 0; }
-  .entry {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 9px 0;
-    border-bottom: 1px solid var(--line);
-  }
+  .entry { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--line); }
   .entry:last-child { border-bottom: none; }
-  .entry .dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-  .entry .meta { flex: 1; min-width: 0; }
+  .entry .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .entry .meta { flex: 1; min-width: 0; cursor: pointer; }
   .entry .cat { font-size: 14px; font-weight: 500; }
   .entry .note { font-size: 12.5px; color: var(--muted); margin-top: 1px; }
-  .entry .amount { font-weight: 600; white-space: nowrap; }
+  .entry .amount { font-weight: 600; white-space: nowrap; cursor: pointer; }
   .entry button.del {
-    border: none;
-    background: none;
-    color: var(--muted);
-    cursor: pointer;
-    font-size: 16px;
-    padding: 4px 2px;
-    line-height: 1;
+    border: none; background: none; color: var(--muted); cursor: pointer; font-size: 16px; padding: 4px 2px; line-height: 1;
   }
   .entry button.del:hover { color: var(--bad); }
 
-  .empty {
-    text-align: center;
-    color: var(--muted);
-    font-size: 13.5px;
-    padding: 22px 10px;
-  }
+  .empty { text-align: center; color: var(--muted); font-size: 13.5px; padding: 22px 10px; }
 
   .toast {
-    position: fixed;
-    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-    left: 50%;
-    transform: translateX(-50%) translateY(12px);
-    background: var(--ink);
-    color: var(--bg);
-    font-size: 13px;
-    font-weight: 600;
-    padding: 9px 16px;
-    border-radius: 999px;
-    box-shadow: var(--shadow);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 10;
+    position: fixed; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); left: 50%;
+    transform: translateX(-50%) translateY(12px); background: var(--ink); color: var(--bg);
+    font-size: 13px; font-weight: 600; padding: 9px 16px; border-radius: 999px; box-shadow: var(--shadow);
+    opacity: 0; pointer-events: none; transition: opacity 0.2s ease, transform 0.2s ease; z-index: 10;
   }
-  .toast.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-  .backup-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 14px;
-  }
+  .backup-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
   .backup-btn {
-    flex: 1;
-    min-width: 140px;
-    border: 1px solid var(--line);
-    background: var(--surface-2);
-    color: var(--ink);
-    font: inherit;
-    font-size: 12.5px;
-    font-weight: 600;
-    padding: 9px 10px;
-    border-radius: 9px;
-    cursor: pointer;
-    text-align: center;
+    flex: 1; min-width: 120px; border: 1px solid var(--line); background: var(--surface-2); color: var(--ink);
+    font: inherit; font-size: 12.5px; font-weight: 600; padding: 9px 10px; border-radius: 9px; cursor: pointer; text-align: center;
   }
   .backup-btn:hover { filter: brightness(0.97); }
-  .backup-note {
-    font-size: 11.5px;
-    color: var(--muted);
-    text-align: center;
+  .backup-note { font-size: 11.5px; color: var(--muted); text-align: center; }
+
+  /* settings */
+  .settings-block { margin-bottom: 20px; }
+  .settings-block:last-child { margin-bottom: 0; }
+  .settings-block .st-label { font-size: 12px; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+  .add-cat-row { display: flex; gap: 8px; margin-top: 10px; }
+  .add-cat-row input { flex: 1; }
+  .add-cat-row button { flex: 0 0 auto; }
+  .pin-row { display: flex; gap: 8px; align-items: flex-end; }
+  .pin-row > div { flex: 1; }
+  .pin-warning { font-size: 11.5px; color: var(--muted); margin-top: 8px; }
+
+  /* overlays: guide + pin lock */
+  .overlay {
+    position: fixed; inset: 0; background: var(--bg); z-index: 50; display: flex;
+    align-items: center; justify-content: center; padding: 24px; padding-top: calc(24px + env(safe-area-inset-top, 0px));
   }
+  .overlay-card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 26px 22px; max-width: 380px; width: 100%;
+  }
+  .overlay-card h2 { margin: 0 0 4px; font-size: 20px; }
+  .overlay-card p { font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .overlay-card ol { padding-left: 20px; margin: 14px 0; font-size: 13.5px; line-height: 1.6; }
+  .overlay-card ol li { margin-bottom: 6px; }
+  .pin-dots { display: flex; gap: 12px; justify-content: center; margin: 22px 0; }
+  .pin-dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--line); }
+  .pin-dot.filled { background: var(--accent); border-color: var(--accent); }
+  .pin-keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .pin-key {
+    font: inherit; font-size: 20px; font-weight: 600; padding: 16px 0; border-radius: 12px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink); cursor: pointer;
+  }
+  .pin-key:hover { background: var(--surface-2); }
+  .pin-error { color: var(--critical); font-size: 12.5px; text-align: center; min-height: 16px; margin-bottom: 4px; }
+
+  .offline-note { font-size: 12px; color: var(--muted); text-align: center; margin-top: -6px; margin-bottom: 14px; }
 
   /* ---- trend view ---- */
-  .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-bottom: 4px;
-  }
-  .kpi {
-    background: var(--surface-2);
-    border-radius: 10px;
-    padding: 12px 14px;
-  }
-  .kpi .kpi-label {
-    font-size: 11px;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .kpi .kpi-value {
-    font-size: 19px;
-    font-weight: 600;
-  }
-  .delta {
-    display: inline-flex;
-    align-items: center;
-    gap: 3px;
-    font-size: 12px;
-    font-weight: 600;
-    margin-left: 6px;
-  }
+  .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 4px; }
+  .kpi { background: var(--surface-2); border-radius: 10px; padding: 12px 14px; }
+  .kpi .kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; margin-bottom: 4px; }
+  .kpi .kpi-value { font-size: 19px; font-weight: 600; }
+  .delta { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; font-weight: 600; margin-left: 6px; }
   .delta.good { color: var(--good); }
   .delta.bad { color: var(--critical); }
   .delta.flat { color: var(--muted); }
-
-  .trend-chart-wrap {
-    position: relative;
-  }
-  .trend-svg {
-    width: 100%;
-    height: 160px;
-    display: block;
-    overflow: visible;
-  }
   .trend-svg .gridline { stroke: var(--line); stroke-width: 1; }
-  .trend-svg .axis-label {
-    fill: var(--muted);
-    font-size: 10px;
-    font-family: "Work Sans", sans-serif;
-  }
-  .trend-svg .trend-line {
-    fill: none;
-    stroke: var(--accent);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
+  .trend-svg .axis-label { fill: var(--muted); font-size: 10px; font-family: "Work Sans", sans-serif; }
+  .trend-svg .trend-line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .trend-svg .trend-area { fill: var(--accent-soft); opacity: 0.7; }
-  .trend-svg .hover-dot {
-    fill: var(--accent);
-    stroke: var(--surface);
-    stroke-width: 2;
-  }
+  .trend-svg .hover-dot { fill: var(--accent); stroke: var(--surface); stroke-width: 2; }
   .trend-svg .hover-line { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; }
   .trend-tooltip {
-    position: absolute;
-    pointer-events: none;
-    background: var(--ink);
-    color: var(--bg);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 5px 9px;
-    border-radius: 7px;
-    transform: translate(-50%, -120%);
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.1s ease;
-    z-index: 3;
+    position: absolute; pointer-events: none; background: var(--ink); color: var(--bg);
+    font-size: 12px; font-weight: 600; padding: 5px 9px; border-radius: 7px;
+    transform: translate(-50%, -120%); white-space: nowrap; opacity: 0; transition: opacity 0.1s ease; z-index: 3;
   }
   .trend-tooltip.show { opacity: 1; }
-
   .movers-list { display: flex; flex-direction: column; gap: 10px; }
-  .mover-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    font-size: 13.5px;
-  }
+  .mover-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 13.5px; }
   .mover-row .mover-name { font-weight: 500; }
   .mover-row .mover-amounts { color: var(--muted); font-size: 12px; }
 </style>
@@ -510,12 +257,38 @@
 </head>
 <body>
 
+<div id="pinOverlay" class="overlay" hidden>
+  <div class="overlay-card">
+    <h2>Inserisci il PIN</h2>
+    <p>App bloccata per privacy.</p>
+    <div class="pin-dots" id="pinDots"></div>
+    <div class="pin-error" id="pinError"></div>
+    <div class="pin-keypad" id="pinKeypad"></div>
+  </div>
+</div>
+
+<div id="guideOverlay" class="overlay" hidden>
+  <div class="overlay-card">
+    <h2>Benvenuto in Diario Spese</h2>
+    <p>Due cose utili prima di iniziare:</p>
+    <ol>
+      <li><strong>Aggiungila alla Home:</strong> nel tuo browser tocca l'icona di condivisione, poi "Aggiungi a Home" — avrai un'icona come una vera app.</li>
+      <li><strong>Fai backup ogni tanto:</strong> i dati restano solo su questo dispositivo. In fondo alla pagina trovi "Esporta backup" — usalo prima di cambiare telefono o svuotare la cache del browser.</li>
+    </ol>
+    <button type="button" class="submit" id="guideCloseBtn" style="width:100%;">Ho capito, inizia</button>
+  </div>
+</div>
+
 <header class="top">
-  <h1>Diario Spese</h1>
+  <div class="title-row">
+    <h1>Diario Spese</h1>
+    <button class="icon-btn" id="helpBtn" aria-label="Aiuto" title="Aiuto">?</button>
+  </div>
   <div class="tabs" role="tablist">
     <button class="tab" id="tabMonth" role="tab" aria-selected="true">Mese</button>
     <button class="tab" id="tabYear" role="tab" aria-selected="false">Anno</button>
     <button class="tab" id="tabTrend" role="tab" aria-selected="false">Andamento</button>
+    <button class="tab" id="tabSettings" role="tab" aria-selected="false">Impostazioni</button>
   </div>
 </header>
 
@@ -525,7 +298,7 @@
   <button id="nextBtn" aria-label="Successivo">›</button>
 </div>
 
-<div class="summary">
+<div class="summary" id="summaryCard">
   <div class="label" id="summaryLabel">Totale del mese</div>
   <div class="total num tabular" id="summaryTotal">$0</div>
   <div class="sub" id="summarySub"></div>
@@ -533,6 +306,7 @@
 
 <div class="card" id="breakdownCard">
   <h2>Per categoria</h2>
+  <div class="pie-wrap"><svg class="pie-svg" id="pieSvg" viewBox="0 0 148 148"></svg></div>
   <div id="breakdown"></div>
 </div>
 
@@ -544,8 +318,8 @@
 <div class="card" id="trendCard" hidden>
   <h2>Ultimi 12 mesi</h2>
   <div class="kpi-grid" id="kpiGrid"></div>
-  <div class="trend-chart-wrap">
-    <svg class="trend-svg" id="trendSvg" viewBox="0 0 320 160" preserveAspectRatio="none"></svg>
+  <div class="trend-chart-wrap" style="position:relative;">
+    <svg class="trend-svg" id="trendSvg" viewBox="0 0 320 160" preserveAspectRatio="none" style="width:100%;height:160px;display:block;overflow:visible;"></svg>
     <div class="trend-tooltip" id="trendTooltip"></div>
   </div>
 </div>
@@ -556,8 +330,39 @@
   <div class="movers-list" id="moversList"></div>
 </div>
 
-<div class="card">
-  <h2>Aggiungi spesa</h2>
+<div class="card" id="settingsCard" hidden>
+  <h2>Impostazioni</h2>
+  <div class="settings-block">
+    <div class="st-label">Categorie</div>
+    <div class="chips" id="settingsCatChips"></div>
+    <div class="add-cat-row">
+      <input type="text" id="newCatInput" placeholder="Nuova categoria">
+      <button type="button" class="ghost" id="addCatBtn">Aggiungi</button>
+    </div>
+  </div>
+  <div class="settings-block">
+    <div class="st-label">Valuta</div>
+    <select id="currencySelect">
+      <option value="$">$ Dollaro</option>
+      <option value="€">€ Euro</option>
+      <option value="£">£ Sterlina</option>
+      <option value="¥">¥ Yen</option>
+      <option value="A$">A$ Dollaro australiano</option>
+      <option value="Fr">Fr Franco svizzero</option>
+    </select>
+  </div>
+  <div class="settings-block">
+    <div class="st-label">Blocco con PIN</div>
+    <div id="pinSettingsView"></div>
+  </div>
+  <div class="settings-block">
+    <div class="st-label">Guida</div>
+    <button type="button" class="ghost" id="reopenGuideBtn">Rivedi la guida iniziale</button>
+  </div>
+</div>
+
+<div class="card" id="formCard">
+  <h2 id="formHeading">Aggiungi spesa</h2>
   <form class="add" id="addForm">
     <div class="row2">
       <div>
@@ -577,19 +382,23 @@
       <label for="fNote">Nota (facoltativa)</label>
       <input type="text" id="fNote" placeholder="es. spesa settimanale">
     </div>
-    <button type="submit" class="submit" id="submitBtn">Aggiungi</button>
+    <div class="form-actions">
+      <button type="submit" class="submit" id="submitBtn">Aggiungi</button>
+      <button type="button" class="ghost" id="cancelEditBtn" hidden>Annulla</button>
+    </div>
   </form>
 </div>
 
 <div class="card" id="listCard">
-  <h2 id="listHeading">Movimenti del mese</h2>
+  <h2 id="listHeading">Movimenti del mese<span class="h2-sub">Tocca una voce per modificarla</span></h2>
   <ul class="entries" id="entriesList"></ul>
 </div>
 
-<div class="card">
+<div class="card" id="backupCard">
   <h2>Backup dati</h2>
   <div class="backup-row">
-    <button type="button" class="backup-btn" id="exportBtn">Esporta backup (.json)</button>
+    <button type="button" class="backup-btn" id="exportJsonBtn">Backup (.json)</button>
+    <button type="button" class="backup-btn" id="exportCsvBtn">Esporta CSV/Excel</button>
     <button type="button" class="backup-btn" id="importBtn">Importa backup</button>
     <input type="file" id="importFile" accept="application/json" hidden>
   </div>
@@ -602,13 +411,19 @@
 (function () {
   "use strict";
 
-  var CATEGORIES = ["Alimentari", "Trasporti", "Casa", "Bollette", "Svago", "Salute", "Shopping", "Altro"];
-  var CURRENCY = "$";
+  var DEFAULT_CATEGORIES = ["Alimentari", "Trasporti", "Casa", "Bollette", "Svago", "Salute", "Shopping", "Altro"];
+  var LOCAL_KEY = "diario-spese-entries-v1";
+  var SETTINGS_KEY = "diario-spese-settings-v1";
+  var GUIDE_KEY = "diario-spese-guide-seen-v1";
 
   var state = {
-    view: "month", // "month" | "year" | "trend"
+    view: "month", // month | year | trend | settings
     cursor: startOfMonth(new Date()),
-    entries: [] // {id, date:"YYYY-MM-DD", amount, category, note, createdAt}
+    entries: [],
+    settings: { categories: DEFAULT_CATEGORIES.slice(), currency: "$", pin: null },
+    editingId: null,
+    unlocked: false,
+    pinBuffer: ""
   };
 
   // ---------- date helpers ----------
@@ -623,7 +438,7 @@
 
   function fmtMoney(n) {
     var v = Math.round(n * 100) / 100;
-    return CURRENCY + v.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return state.settings.currency + v.toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
   function fmtDayHeading(iso) {
     var d = new Date(iso + "T00:00:00");
@@ -634,32 +449,52 @@
     return DAYS_IT[d.getDay()] + " " + d.getDate() + " " + MONTHS_SHORT_IT[d.getMonth()];
   }
 
-  // ---------- storage (this device only) ----------
-  var LOCAL_KEY = "diario-spese-entries-v1";
+  // ---------- storage ----------
   function loadLocal() {
-    try {
-      var raw = localStorage.getItem(LOCAL_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (e) { return []; }
+    try { var raw = localStorage.getItem(LOCAL_KEY); return raw ? JSON.parse(raw) : []; } catch (e) { return []; }
   }
   function saveLocal() {
-    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state.entries)); } catch (e) {
-      showToast("Impossibile salvare: spazio esaurito?");
-    }
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state.entries)); }
+    catch (e) { showToast("Impossibile salvare: spazio esaurito?"); }
+  }
+  function loadSettings() {
+    try {
+      var raw = localStorage.getItem(SETTINGS_KEY);
+      if (!raw) return { categories: DEFAULT_CATEGORIES.slice(), currency: "$", pin: null };
+      var parsed = JSON.parse(raw);
+      return {
+        categories: Array.isArray(parsed.categories) && parsed.categories.length ? parsed.categories : DEFAULT_CATEGORIES.slice(),
+        currency: parsed.currency || "$",
+        pin: parsed.pin || null
+      };
+    } catch (e) { return { categories: DEFAULT_CATEGORIES.slice(), currency: "$", pin: null }; }
+  }
+  function saveSettings() {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(state.settings)); } catch (e) {}
   }
 
-  // ---------- render ----------
+  // ---------- elements ----------
   var els = {
+    helpBtn: document.getElementById("helpBtn"),
     tabMonth: document.getElementById("tabMonth"),
     tabYear: document.getElementById("tabYear"),
     tabTrend: document.getElementById("tabTrend"),
+    tabSettings: document.getElementById("tabSettings"),
     navWrap: document.getElementById("navWrap"),
+    summaryCard: document.getElementById("summaryCard"),
     trendCard: document.getElementById("trendCard"),
     kpiGrid: document.getElementById("kpiGrid"),
     trendSvg: document.getElementById("trendSvg"),
     trendTooltip: document.getElementById("trendTooltip"),
     moversCard: document.getElementById("moversCard"),
     moversList: document.getElementById("moversList"),
+    settingsCard: document.getElementById("settingsCard"),
+    settingsCatChips: document.getElementById("settingsCatChips"),
+    newCatInput: document.getElementById("newCatInput"),
+    addCatBtn: document.getElementById("addCatBtn"),
+    currencySelect: document.getElementById("currencySelect"),
+    pinSettingsView: document.getElementById("pinSettingsView"),
+    reopenGuideBtn: document.getElementById("reopenGuideBtn"),
     prevBtn: document.getElementById("prevBtn"),
     nextBtn: document.getElementById("nextBtn"),
     periodLabel: document.getElementById("periodLabel"),
@@ -668,8 +503,11 @@
     summarySub: document.getElementById("summarySub"),
     breakdownCard: document.getElementById("breakdownCard"),
     breakdown: document.getElementById("breakdown"),
+    pieSvg: document.getElementById("pieSvg"),
     yearCard: document.getElementById("yearCard"),
     yearGrid: document.getElementById("yearGrid"),
+    formCard: document.getElementById("formCard"),
+    formHeading: document.getElementById("formHeading"),
     listCard: document.getElementById("listCard"),
     listHeading: document.getElementById("listHeading"),
     entriesList: document.getElementById("entriesList"),
@@ -679,35 +517,91 @@
     fNote: document.getElementById("fNote"),
     catChips: document.getElementById("catChips"),
     submitBtn: document.getElementById("submitBtn"),
-    toast: document.getElementById("toast"),
-    exportBtn: document.getElementById("exportBtn"),
+    cancelEditBtn: document.getElementById("cancelEditBtn"),
+    backupCard: document.getElementById("backupCard"),
+    exportJsonBtn: document.getElementById("exportJsonBtn"),
+    exportCsvBtn: document.getElementById("exportCsvBtn"),
     importBtn: document.getElementById("importBtn"),
-    importFile: document.getElementById("importFile")
+    importFile: document.getElementById("importFile"),
+    toast: document.getElementById("toast"),
+    guideOverlay: document.getElementById("guideOverlay"),
+    guideCloseBtn: document.getElementById("guideCloseBtn"),
+    pinOverlay: document.getElementById("pinOverlay"),
+    pinDots: document.getElementById("pinDots"),
+    pinError: document.getElementById("pinError"),
+    pinKeypad: document.getElementById("pinKeypad")
   };
 
-  var selectedCategory = CATEGORIES[0];
-  CATEGORIES.forEach(function (cat) {
-    var b = document.createElement("button");
-    b.type = "button";
-    b.className = "chip";
-    b.textContent = cat;
-    b.setAttribute("aria-pressed", cat === selectedCategory ? "true" : "false");
-    b.addEventListener("click", function () {
-      selectedCategory = cat;
-      Array.prototype.forEach.call(els.catChips.children, function (c) {
-        c.setAttribute("aria-pressed", c.textContent === cat ? "true" : "false");
-      });
-    });
-    els.catChips.appendChild(b);
-  });
-
-  els.fDate.value = isoDate(new Date());
+  var selectedCategory = null;
 
   function showToast(msg) {
     els.toast.textContent = msg;
     els.toast.classList.add("show");
     setTimeout(function () { els.toast.classList.remove("show"); }, 1800);
   }
+  function categoryColor(cat) {
+    var idx = state.settings.categories.indexOf(cat);
+    if (idx === -1) idx = state.settings.categories.length;
+    return "var(--cat-" + (idx % 8) + ")";
+  }
+
+  function polarToCartesian(cx, cy, r, angleDeg) {
+    var rad = (angleDeg - 90) * Math.PI / 180;
+    return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+  }
+  function describeSlice(cx, cy, r, startAngle, endAngle) {
+    var start = polarToCartesian(cx, cy, r, endAngle);
+    var end = polarToCartesian(cx, cy, r, startAngle);
+    var largeArc = (endAngle - startAngle) <= 180 ? "0" : "1";
+    return ["M", cx, cy, "L", start.x, start.y, "A", r, r, 0, largeArc, 0, end.x, end.y, "Z"].join(" ");
+  }
+  function drawPieChart(byCat, cats, total) {
+    var svg = els.pieSvg;
+    var size = 148, r = 68, cx = size / 2, cy = size / 2;
+    if (!cats.length || total <= 0) { svg.innerHTML = ""; return; }
+    if (cats.length === 1) {
+      svg.innerHTML = '<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="' + categoryColor(cats[0]) + '"></circle>';
+      return;
+    }
+    var angle = 0, parts = "";
+    cats.forEach(function (cat) {
+      var slice = (byCat[cat] / total) * 360;
+      if (slice <= 0) return;
+      parts += '<path d="' + describeSlice(cx, cy, r, angle, angle + slice) + '" fill="' + categoryColor(cat) + '" stroke="var(--surface)" stroke-width="2"></path>';
+      angle += slice;
+    });
+    svg.innerHTML = parts;
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  // ---------- category chips (add form) ----------
+  function rebuildCatChips() {
+    els.catChips.innerHTML = "";
+    if (!selectedCategory || state.settings.categories.indexOf(selectedCategory) === -1) {
+      selectedCategory = state.settings.categories[0] || "Altro";
+    }
+    state.settings.categories.forEach(function (cat) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.textContent = cat;
+      b.setAttribute("aria-pressed", cat === selectedCategory ? "true" : "false");
+      b.addEventListener("click", function () {
+        selectedCategory = cat;
+        Array.prototype.forEach.call(els.catChips.children, function (c) {
+          c.setAttribute("aria-pressed", c.textContent === cat ? "true" : "false");
+        });
+      });
+      els.catChips.appendChild(b);
+    });
+  }
+
+  els.fDate.value = isoDate(new Date());
 
   function entriesForMonth(d) {
     var key = ymKey(d);
@@ -718,7 +612,13 @@
   }
 
   function render() {
-    els.navWrap.hidden = state.view === "trend";
+    els.navWrap.hidden = state.view === "trend" || state.view === "settings";
+    els.summaryCard.hidden = state.view === "settings";
+    els.formCard.hidden = state.view === "settings";
+    els.listCard.hidden = state.view === "settings";
+    els.backupCard.hidden = state.view === "settings";
+    els.settingsCard.hidden = state.view !== "settings";
+    if (state.view === "settings") { renderSettings(); return; }
     if (state.view === "month") renderMonth();
     else if (state.view === "year") renderYear();
     else renderTrend();
@@ -729,16 +629,13 @@
     els.yearCard.hidden = true;
     els.trendCard.hidden = true;
     els.moversCard.hidden = true;
-    els.listCard.hidden = false;
     els.periodLabel.textContent = MONTHS_IT[state.cursor.getMonth()] + " " + state.cursor.getFullYear();
     els.summaryLabel.textContent = "Totale del mese";
 
     var monthEntries = entriesForMonth(state.cursor);
     var total = monthEntries.reduce(function (s, e) { return s + e.amount; }, 0);
     els.summaryTotal.textContent = fmtMoney(total);
-    var daysSoFar = isSameMonth(state.cursor, new Date())
-      ? new Date().getDate()
-      : daysInMonth(state.cursor);
+    var daysSoFar = isSameMonth(state.cursor, new Date()) ? new Date().getDate() : daysInMonth(state.cursor);
     els.summarySub.textContent = monthEntries.length
       ? (monthEntries.length + " movimenti · media giornaliera " + fmtMoney(total / Math.max(daysSoFar, 1)))
       : "Nessuna spesa registrata";
@@ -747,6 +644,7 @@
     monthEntries.forEach(function (e) { byCat[e.category] = (byCat[e.category] || 0) + e.amount; });
     var cats = Object.keys(byCat).sort(function (a, b) { return byCat[b] - byCat[a]; });
     var max = cats.length ? byCat[cats[0]] : 0;
+    drawPieChart(byCat, cats, total);
     els.breakdown.innerHTML = "";
     if (!cats.length) {
       els.breakdown.innerHTML = '<div class="empty">Aggiungi una spesa per vedere la ripartizione</div>';
@@ -755,15 +653,18 @@
         var row = document.createElement("div");
         row.className = "bar-row";
         var pct = max ? Math.max((byCat[cat] / max) * 100, 3) : 0;
+        var sharePct = total ? Math.round((byCat[cat] / total) * 100) : 0;
+        var color = categoryColor(cat);
         row.innerHTML =
-          '<div class="cat-name">' + escapeHtml(cat) + '</div>' +
-          '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
+          '<div class="cat-dot" style="background:' + color + '"></div>' +
+          '<div class="cat-name">' + escapeHtml(cat) + '<span class="cat-pct">' + sharePct + '%</span></div>' +
+          '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:' + color + '"></div></div>' +
           '<div class="cat-amount tabular">' + fmtMoney(byCat[cat]) + '</div>';
         els.breakdown.appendChild(row);
       });
     }
 
-    els.listHeading.textContent = "Movimenti del mese";
+    els.listHeading.innerHTML = 'Movimenti del mese<span class="h2-sub">Tocca una voce per modificarla</span>';
     renderEntryList(monthEntries.slice().sort(function (a, b) { return b.date.localeCompare(a.date) || (b.createdAt || 0) - (a.createdAt || 0); }));
   }
 
@@ -772,7 +673,6 @@
     els.yearCard.hidden = false;
     els.trendCard.hidden = true;
     els.moversCard.hidden = true;
-    els.listCard.hidden = false;
     var y = state.cursor.getFullYear();
     els.periodLabel.textContent = String(y);
     els.summaryLabel.textContent = "Totale dell'anno";
@@ -786,10 +686,7 @@
       : "Nessuna spesa registrata";
 
     var byMonth = new Array(12).fill(0);
-    yearEntries.forEach(function (e) {
-      var m = parseInt(e.date.slice(5, 7), 10) - 1;
-      byMonth[m] += e.amount;
-    });
+    yearEntries.forEach(function (e) { byMonth[parseInt(e.date.slice(5, 7), 10) - 1] += e.amount; });
     var max = Math.max.apply(null, byMonth.concat([0.01]));
     var now = new Date();
     els.yearGrid.innerHTML = "";
@@ -809,7 +706,7 @@
       els.yearGrid.appendChild(col);
     });
 
-    els.listHeading.textContent = "Movimenti dell'anno";
+    els.listHeading.innerHTML = 'Movimenti dell\'anno<span class="h2-sub">Tocca una voce per modificarla</span>';
     renderEntryList(yearEntries.slice().sort(function (a, b) { return b.date.localeCompare(a.date) || (b.createdAt || 0) - (a.createdAt || 0); }).slice(0, 200));
   }
 
@@ -818,7 +715,6 @@
     els.yearCard.hidden = true;
     els.trendCard.hidden = false;
     els.moversCard.hidden = false;
-    els.listCard.hidden = true;
     els.periodLabel.textContent = "";
     els.summaryLabel.textContent = "Totale ultimi 12 mesi";
 
@@ -884,40 +780,29 @@
       var y = padT + innerH - (m.total / max) * innerH;
       return { x: x, y: y, m: m };
     });
-
     var linePath = pts.map(function (p, i) { return (i === 0 ? "M" : "L") + p.x.toFixed(1) + "," + p.y.toFixed(1); }).join(" ");
-    var areaPath = linePath + " L" + pts[pts.length - 1].x.toFixed(1) + "," + (padT + innerH) +
-      " L" + pts[0].x.toFixed(1) + "," + (padT + innerH) + " Z";
-
+    var areaPath = linePath + " L" + pts[pts.length - 1].x.toFixed(1) + "," + (padT + innerH) + " L" + pts[0].x.toFixed(1) + "," + (padT + innerH) + " Z";
     var gridY = [0, 0.5, 1].map(function (f) {
       var y = padT + innerH * f;
       return '<line class="gridline" x1="' + padL + '" x2="' + (W - padR) + '" y1="' + y + '" y2="' + y + '"></line>';
     }).join("");
-
     var labels = pts.map(function (p, i) {
       if (n > 8 && i % 2 !== (n - 1) % 2) return "";
       return '<text class="axis-label" x="' + p.x + '" y="' + (H - 3) + '" text-anchor="middle">' + p.m.label + '</text>';
     }).join("");
-
-    svg.innerHTML =
-      gridY +
+    svg.innerHTML = gridY +
       '<path class="trend-area" d="' + areaPath + '"></path>' +
       '<path class="trend-line" d="' + linePath + '"></path>' +
-      labels +
-      '<g id="hoverLayer"></g>' +
+      labels + '<g id="hoverLayer"></g>' +
       '<rect id="hoverCatcher" x="0" y="0" width="' + W + '" height="' + H + '" fill="transparent"></rect>';
 
     var hoverLayer = svg.querySelector("#hoverLayer");
     var catcher = svg.querySelector("#hoverCatcher");
-
     function showHover(clientX) {
       var rect = svg.getBoundingClientRect();
       var relX = ((clientX - rect.left) / rect.width) * W;
       var closest = pts[0], bestDist = Infinity;
-      pts.forEach(function (p) {
-        var dist = Math.abs(p.x - relX);
-        if (dist < bestDist) { bestDist = dist; closest = p; }
-      });
+      pts.forEach(function (p) { var dist = Math.abs(p.x - relX); if (dist < bestDist) { bestDist = dist; closest = p; } });
       hoverLayer.innerHTML =
         '<line class="hover-line" x1="' + closest.x + '" x2="' + closest.x + '" y1="' + padT + '" y2="' + (padT + innerH) + '"></line>' +
         '<circle class="hover-dot" cx="' + closest.x + '" cy="' + closest.y + '" r="4"></circle>';
@@ -931,10 +816,7 @@
       tt.style.top = (pxY - wrapRect.top) + "px";
       tt.classList.add("show");
     }
-    function hideHover() {
-      hoverLayer.innerHTML = "";
-      els.trendTooltip.classList.remove("show");
-    }
+    function hideHover() { hoverLayer.innerHTML = ""; els.trendTooltip.classList.remove("show"); }
     catcher.addEventListener("pointermove", function (ev) { showHover(ev.clientX); });
     catcher.addEventListener("pointerleave", hideHover);
     catcher.addEventListener("pointerdown", function (ev) { showHover(ev.clientX); });
@@ -948,9 +830,7 @@
         var d = new Date(now.getFullYear(), now.getMonth() - monthsBack - i, 1);
         var key = ymKey(d);
         state.entries.forEach(function (e) {
-          if (e.date && e.date.slice(0, 7) === key) {
-            totals[e.category] = (totals[e.category] || 0) + e.amount;
-          }
+          if (e.date && e.date.slice(0, 7) === key) totals[e.category] = (totals[e.category] || 0) + e.amount;
         });
       }
       return totals;
@@ -962,10 +842,7 @@
     cats.sort(function (a, b) { return (recent[b] || 0) - (recent[a] || 0); });
 
     els.moversList.innerHTML = "";
-    if (!cats.length) {
-      els.moversList.innerHTML = '<div class="empty">Non ci sono ancora abbastanza dati</div>';
-      return;
-    }
+    if (!cats.length) { els.moversList.innerHTML = '<div class="empty">Non ci sono ancora abbastanza dati</div>'; return; }
     cats.slice(0, 6).forEach(function (c) {
       var r = recent[c] || 0, p = prior[c] || 0;
       var badge;
@@ -974,16 +851,55 @@
         var cls = Math.abs(pct) < 3 ? "flat" : (pct > 0 ? "bad" : "good");
         var arrow = pct > 0 ? "▲" : pct < 0 ? "▼" : "•";
         badge = '<span class="delta ' + cls + '">' + arrow + " " + Math.abs(Math.round(pct)) + "%</span>";
-      } else {
-        badge = '<span class="delta bad">nuova</span>';
-      }
+      } else { badge = '<span class="delta bad">nuova</span>'; }
       var row = document.createElement("div");
       row.className = "mover-row";
-      row.innerHTML =
-        '<div><div class="mover-name">' + escapeHtml(c) + '</div><div class="mover-amounts">' +
+      row.innerHTML = '<div><div class="mover-name">' + escapeHtml(c) + '</div><div class="mover-amounts">' +
         fmtMoney(p) + ' → ' + fmtMoney(r) + '</div></div>' + badge;
       els.moversList.appendChild(row);
     });
+  }
+
+  function renderSettings() {
+    els.settingsCatChips.innerHTML = "";
+    state.settings.categories.forEach(function (cat) {
+      var chip = document.createElement("span");
+      chip.className = "chip removable";
+      chip.innerHTML = escapeHtml(cat) + ' <span class="x">✕</span>';
+      chip.addEventListener("click", function () {
+        if (state.settings.categories.length <= 1) { showToast("Serve almeno una categoria"); return; }
+        state.settings.categories = state.settings.categories.filter(function (c) { return c !== cat; });
+        saveSettings();
+        rebuildCatChips();
+        renderSettings();
+      });
+      els.settingsCatChips.appendChild(chip);
+    });
+
+    els.currencySelect.value = state.settings.currency;
+
+    renderPinSettings();
+  }
+
+  function renderPinSettings() {
+    if (state.settings.pin) {
+      els.pinSettingsView.innerHTML =
+        '<div class="backup-note" style="margin-bottom:10px;text-align:left;">PIN attivo.</div>' +
+        '<button type="button" class="ghost" id="removePinBtn">Rimuovi PIN</button>';
+      document.getElementById("removePinBtn").addEventListener("click", function () {
+        state.settings.pin = null;
+        saveSettings();
+        renderPinSettings();
+        showToast("PIN rimosso");
+      });
+    } else {
+      els.pinSettingsView.innerHTML =
+        '<button type="button" class="ghost" id="setPinBtn">Imposta un PIN a 4 cifre</button>' +
+        '<div class="pin-warning">Il PIN blocca solo l\'apertura su questo dispositivo, non è una vera crittografia. Se lo dimentichi, l\'unico modo per rientrare è cancellare i dati del sito dal browser — perdendo lo storico salvato qui: esporta un backup prima di impostarlo.</div>';
+      document.getElementById("setPinBtn").addEventListener("click", function () {
+        openPinCapture();
+      });
+    }
   }
 
   function daysInMonth(d) { return new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate(); }
@@ -991,10 +907,7 @@
 
   function renderEntryList(list) {
     els.entriesList.innerHTML = "";
-    if (!list.length) {
-      els.entriesList.innerHTML = '<li class="empty">Nessun movimento in questo periodo</li>';
-      return;
-    }
+    if (!list.length) { els.entriesList.innerHTML = '<li class="empty">Nessun movimento in questo periodo</li>'; return; }
     var lastDay = null;
     list.forEach(function (e) {
       if (e.date !== lastDay) {
@@ -1012,14 +925,10 @@
         (e.note ? '<div class="note">' + escapeHtml(e.note) + '</div>' : '') + '</div>' +
         '<div class="amount tabular">' + fmtMoney(e.amount) + '</div>' +
         '<button class="del" aria-label="Elimina" data-id="' + e.id + '">✕</button>';
-      li.querySelector(".del").addEventListener("click", function () { removeEntry(e.id); });
+      li.querySelector(".meta").addEventListener("click", function () { startEdit(e.id); });
+      li.querySelector(".amount").addEventListener("click", function () { startEdit(e.id); });
+      li.querySelector(".del").addEventListener("click", function (ev) { ev.stopPropagation(); removeEntry(e.id); });
       els.entriesList.appendChild(li);
-    });
-  }
-
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, function (c) {
-      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
 
@@ -1030,48 +939,67 @@
     saveLocal();
     render();
   }
+  function updateEntry(id, patch) {
+    var e = state.entries.find(function (x) { return x.id === id; });
+    if (!e) return;
+    Object.assign(e, patch);
+    saveLocal();
+    render();
+  }
   function removeEntry(id) {
+    if (state.editingId === id) cancelEdit();
     state.entries = state.entries.filter(function (e) { return e.id !== id; });
     saveLocal();
     render();
   }
+  function startEdit(id) {
+    var e = state.entries.find(function (x) { return x.id === id; });
+    if (!e) return;
+    state.editingId = id;
+    els.fDate.value = e.date;
+    els.fAmount.value = e.amount;
+    els.fNote.value = e.note || "";
+    selectedCategory = e.category;
+    if (state.settings.categories.indexOf(selectedCategory) === -1) {
+      state.settings.categories.push(selectedCategory);
+      saveSettings();
+    }
+    rebuildCatChips();
+    els.formHeading.textContent = "Modifica spesa";
+    els.submitBtn.textContent = "Salva modifiche";
+    els.cancelEditBtn.hidden = false;
+    els.formCard.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  function cancelEdit() {
+    state.editingId = null;
+    els.addForm.reset();
+    els.fDate.value = isoDate(new Date());
+    selectedCategory = state.settings.categories[0];
+    rebuildCatChips();
+    els.formHeading.textContent = "Aggiungi spesa";
+    els.submitBtn.textContent = "Aggiungi";
+    els.cancelEditBtn.hidden = true;
+  }
 
-  // ---------- events ----------
-  els.tabMonth.addEventListener("click", function () {
-    state.view = "month";
-    state.cursor = startOfMonth(state.cursor);
-    syncTabs();
-    render();
-  });
-  els.tabYear.addEventListener("click", function () {
-    state.view = "year";
-    syncTabs();
-    render();
-  });
-  els.tabTrend.addEventListener("click", function () {
-    state.view = "trend";
-    syncTabs();
-    render();
-  });
+  // ---------- events: tabs & nav ----------
+  els.tabMonth.addEventListener("click", function () { state.view = "month"; state.cursor = startOfMonth(state.cursor); syncTabs(); render(); });
+  els.tabYear.addEventListener("click", function () { state.view = "year"; syncTabs(); render(); });
+  els.tabTrend.addEventListener("click", function () { state.view = "trend"; syncTabs(); render(); });
+  els.tabSettings.addEventListener("click", function () { state.view = "settings"; syncTabs(); render(); });
   function syncTabs() {
     els.tabMonth.setAttribute("aria-selected", state.view === "month" ? "true" : "false");
     els.tabYear.setAttribute("aria-selected", state.view === "year" ? "true" : "false");
     els.tabTrend.setAttribute("aria-selected", state.view === "trend" ? "true" : "false");
+    els.tabSettings.setAttribute("aria-selected", state.view === "settings" ? "true" : "false");
   }
   els.prevBtn.addEventListener("click", function () {
-    if (state.view === "month") {
-      state.cursor = new Date(state.cursor.getFullYear(), state.cursor.getMonth() - 1, 1);
-    } else {
-      state.cursor = new Date(state.cursor.getFullYear() - 1, state.cursor.getMonth(), 1);
-    }
+    if (state.view === "month") state.cursor = new Date(state.cursor.getFullYear(), state.cursor.getMonth() - 1, 1);
+    else state.cursor = new Date(state.cursor.getFullYear() - 1, state.cursor.getMonth(), 1);
     render();
   });
   els.nextBtn.addEventListener("click", function () {
-    if (state.view === "month") {
-      state.cursor = new Date(state.cursor.getFullYear(), state.cursor.getMonth() + 1, 1);
-    } else {
-      state.cursor = new Date(state.cursor.getFullYear() + 1, state.cursor.getMonth(), 1);
-    }
+    if (state.view === "month") state.cursor = new Date(state.cursor.getFullYear(), state.cursor.getMonth() + 1, 1);
+    else state.cursor = new Date(state.cursor.getFullYear() + 1, state.cursor.getMonth(), 1);
     render();
   });
 
@@ -1079,32 +1007,71 @@
     ev.preventDefault();
     var amount = parseFloat(els.fAmount.value);
     if (!amount || amount <= 0 || !els.fDate.value) return;
-    var entry = {
+    var payload = {
       date: els.fDate.value,
       amount: Math.round(amount * 100) / 100,
       category: selectedCategory,
-      note: els.fNote.value.trim(),
-      createdAt: Date.now()
+      note: els.fNote.value.trim()
     };
-    addEntry(entry);
-    els.fAmount.value = "";
-    els.fNote.value = "";
-    showToast("Spesa aggiunta");
+    if (state.editingId) {
+      updateEntry(state.editingId, payload);
+      cancelEdit();
+      showToast("Spesa aggiornata");
+    } else {
+      payload.createdAt = Date.now();
+      addEntry(payload);
+      els.fAmount.value = "";
+      els.fNote.value = "";
+      showToast("Spesa aggiunta");
+    }
+  });
+  els.cancelEditBtn.addEventListener("click", cancelEdit);
+
+  // ---------- settings: categories & currency ----------
+  els.addCatBtn.addEventListener("click", function () {
+    var val = els.newCatInput.value.trim();
+    if (!val) return;
+    if (state.settings.categories.indexOf(val) !== -1) { showToast("Categoria già presente"); return; }
+    state.settings.categories.push(val);
+    saveSettings();
+    els.newCatInput.value = "";
+    rebuildCatChips();
+    renderSettings();
+  });
+  els.newCatInput.addEventListener("keydown", function (ev) { if (ev.key === "Enter") { ev.preventDefault(); els.addCatBtn.click(); } });
+  els.currencySelect.addEventListener("change", function () {
+    state.settings.currency = els.currencySelect.value;
+    saveSettings();
+    render();
   });
 
   // ---------- backup / restore ----------
-  els.exportBtn.addEventListener("click", function () {
-    var payload = { app: "diario-spese", exportedAt: new Date().toISOString(), entries: state.entries };
-    var blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  function downloadBlob(content, type, filename) {
+    var blob = new Blob([content], { type: type });
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
-    a.href = url;
-    a.download = "diario-spese-backup-" + isoDate(new Date()) + ".json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
     setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+  }
+  els.exportJsonBtn.addEventListener("click", function () {
+    var payload = { app: "diario-spese", exportedAt: new Date().toISOString(), entries: state.entries, settings: state.settings };
+    downloadBlob(JSON.stringify(payload, null, 2), "application/json", "diario-spese-backup-" + isoDate(new Date()) + ".json");
     showToast("Backup scaricato");
+  });
+  els.exportCsvBtn.addEventListener("click", function () {
+    function csvField(v) {
+      var s = String(v == null ? "" : v);
+      if (/[",\n]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+      return s;
+    }
+    var rows = [["Data", "Importo", "Categoria", "Nota"]];
+    state.entries.slice().sort(function (a, b) { return a.date.localeCompare(b.date); }).forEach(function (e) {
+      rows.push([e.date, e.amount.toFixed(2), e.category, e.note || ""]);
+    });
+    var csv = rows.map(function (r) { return r.map(csvField).join(","); }).join("\r\n");
+    downloadBlob("﻿" + csv, "text/csv;charset=utf-8", "diario-spese-" + isoDate(new Date()) + ".csv");
+    showToast("CSV scaricato");
   });
   els.importBtn.addEventListener("click", function () { els.importFile.click(); });
   els.importFile.addEventListener("change", function () {
@@ -1122,28 +1089,134 @@
           if (!e || !e.date || typeof e.amount !== "number") return;
           if (!e.id) e.id = "e-" + Date.now() + "-" + Math.random().toString(36).slice(2, 7);
           if (existingIds.has(e.id)) return;
-          state.entries.push({
-            id: e.id, date: e.date, amount: e.amount,
-            category: e.category || "Altro", note: e.note || "", createdAt: e.createdAt || Date.now()
-          });
+          state.entries.push({ id: e.id, date: e.date, amount: e.amount, category: e.category || "Altro", note: e.note || "", createdAt: e.createdAt || Date.now() });
           existingIds.add(e.id);
           added++;
         });
+        if (data.settings && Array.isArray(data.settings.categories)) {
+          data.settings.categories.forEach(function (c) { if (state.settings.categories.indexOf(c) === -1) state.settings.categories.push(c); });
+          saveSettings();
+          rebuildCatChips();
+        }
         saveLocal();
         render();
         showToast(added + " movimenti importati");
-      } catch (err) {
-        showToast("File di backup non valido");
-      }
+      } catch (err) { showToast("File di backup non valido"); }
       els.importFile.value = "";
     };
     reader.readAsText(file);
   });
 
+  // ---------- guide overlay ----------
+  els.helpBtn.addEventListener("click", function () { els.guideOverlay.hidden = false; });
+  els.reopenGuideBtn.addEventListener("click", function () { els.guideOverlay.hidden = false; });
+  els.guideCloseBtn.addEventListener("click", function () {
+    els.guideOverlay.hidden = true;
+    try { localStorage.setItem(GUIDE_KEY, "1"); } catch (e) {}
+  });
+
+  // ---------- PIN lock ----------
+  function buildKeypad(onKey) {
+    els.pinKeypad.innerHTML = "";
+    ["1","2","3","4","5","6","7","8","9","","0","⌫"].forEach(function (k) {
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "pin-key";
+      btn.textContent = k;
+      if (k === "") { btn.style.visibility = "hidden"; }
+      else btn.addEventListener("click", function () { onKey(k); });
+      els.pinKeypad.appendChild(btn);
+    });
+  }
+  function renderPinDots(len, total) {
+    els.pinDots.innerHTML = "";
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement("div");
+      dot.className = "pin-dot" + (i < len ? " filled" : "");
+      els.pinDots.appendChild(dot);
+    }
+  }
+
+  function openPinLock() {
+    var buffer = "";
+    els.pinOverlay.querySelector("h2").textContent = "Inserisci il PIN";
+    els.pinOverlay.querySelector("p").textContent = "App bloccata per privacy.";
+    els.pinError.textContent = "";
+    renderPinDots(0, 4);
+    els.pinOverlay.hidden = false;
+    buildKeypad(function (k) {
+      if (k === "⌫") { buffer = buffer.slice(0, -1); renderPinDots(buffer.length, 4); els.pinError.textContent = ""; return; }
+      if (buffer.length >= 4) return;
+      buffer += k;
+      renderPinDots(buffer.length, 4);
+      if (buffer.length === 4) {
+        if (buffer === state.settings.pin) {
+          els.pinOverlay.hidden = true;
+          state.unlocked = true;
+          boot();
+        } else {
+          els.pinError.textContent = "PIN errato, riprova";
+          buffer = "";
+          setTimeout(function () { renderPinDots(0, 4); }, 300);
+        }
+      }
+    });
+  }
+
+  function openPinCapture() {
+    var buffer = "";
+    var stage = 1; // 1 = enter, 2 = confirm
+    var firstPin = "";
+    els.pinOverlay.querySelector("h2").textContent = "Crea un PIN";
+    els.pinOverlay.querySelector("p").textContent = "Scegli 4 cifre";
+    els.pinError.textContent = "";
+    renderPinDots(0, 4);
+    els.pinOverlay.hidden = false;
+    buildKeypad(function (k) {
+      if (k === "⌫") { buffer = buffer.slice(0, -1); renderPinDots(buffer.length, 4); els.pinError.textContent = ""; return; }
+      if (buffer.length >= 4) return;
+      buffer += k;
+      renderPinDots(buffer.length, 4);
+      if (buffer.length === 4) {
+        if (stage === 1) {
+          firstPin = buffer;
+          buffer = "";
+          stage = 2;
+          els.pinOverlay.querySelector("h2").textContent = "Conferma il PIN";
+          els.pinError.textContent = "";
+          setTimeout(function () { renderPinDots(0, 4); }, 200);
+        } else {
+          if (buffer === firstPin) {
+            state.settings.pin = buffer;
+            saveSettings();
+            els.pinOverlay.hidden = true;
+            renderPinSettings();
+            showToast("PIN impostato");
+          } else {
+            els.pinError.textContent = "Non corrisponde, riprova";
+            buffer = ""; stage = 1; firstPin = "";
+            els.pinOverlay.querySelector("h2").textContent = "Crea un PIN";
+            setTimeout(function () { renderPinDots(0, 4); }, 300);
+          }
+        }
+      }
+    });
+  }
+
   // ---------- boot ----------
-  state.entries = loadLocal();
-  syncTabs();
-  render();
+  function boot() {
+    state.entries = loadLocal();
+    state.settings = loadSettings();
+    rebuildCatChips();
+    syncTabs();
+    render();
+    var guideSeen = false;
+    try { guideSeen = !!localStorage.getItem(GUIDE_KEY); } catch (e) {}
+    if (!guideSeen) els.guideOverlay.hidden = false;
+  }
+
+  var initialSettings = loadSettings();
+  if (initialSettings.pin) { openPinLock(); } else { boot(); }
 })();
 </script>
 </body>
